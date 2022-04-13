@@ -2,41 +2,33 @@
 # -*- coding: utf-8 -*-
 # Author : Torrez, MN
 
+import os
+from pathlib import Path
 from typing import Optional
-
 from faker import Faker as F
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
-app = FastAPI()
+#  IMPORTING SCHEMAS
+
+#  IMPORTING ROUTERS
+from routers import (profile_router)
+
+#  IMPORTING METADATA
+from api_metadata import api_metadata
+
+app = FastAPI(title="PlaceHolder - API",
+              description="A small api for testing proposites..",
+              version="0.0.1",
+              openapi_tags=api_metadata)
+
+#  INCLUDING ROUTERS
+app.include_router(profile_router.profile_router)
+
+#  STATIC & TEMPLATES
+BASE_DIR = Path(__file__).resolve().parent
 
 
-@app.get("/")
-def read_root():
-    return RedirectResponse(url='/docs')
-
-
-#  PROFILE
-@app.get('/profile')
-def profile():
-    """Returns a single profile."""
-    return {'data': F().profile()}
-
-
-@app.get('/profile/{quantity}')
-def profiles(quantity: int):
-    """Returns a set of profiles."""
-    return {'data': [F().profile() for i in range(0, quantity)]}
-
-
-#  RANDOM SHIT
-@app.get('/address')
-def addres():
-    """Returns a single addres."""
-    return {'address': F().address()}
-
-
-@app.get('/address/{quantity}')
-def addresses(quantity: int):
-    """Return's a set of addresses matching the number requested."""
-    return {'data': [F().address() for i in range(0, quantity)]}
+@app.get('/', include_in_schema=False)
+def api_home():
+    return ('HOME PAGE!')
