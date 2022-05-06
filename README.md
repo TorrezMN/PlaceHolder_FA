@@ -52,4 +52,8 @@ then run the project with docker-compose:
 sudo docker-compose up
 ```
 
+go to your  [web browser](http://0.0.0.0:8000/docs) and enjoy.
 
+```
+http://0.0.0.0:8000/docs
+```
