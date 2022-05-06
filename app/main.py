@@ -12,7 +12,7 @@ from fastapi.responses import RedirectResponse
 #  IMPORTING SCHEMAS
 
 #  IMPORTING ROUTERS
-from routers import (profile_router)
+from routers import (profile_router, utilities_router)
 
 #  IMPORTING METADATA
 from api_metadata import api_metadata
@@ -24,6 +24,7 @@ app = FastAPI(title="PlaceHolder - API",
 
 #  INCLUDING ROUTERS
 app.include_router(profile_router.profile_router)
+app.include_router(utilities_router.utilities_router)
 
 #  STATIC & TEMPLATES
 BASE_DIR = Path(__file__).resolve().parent
