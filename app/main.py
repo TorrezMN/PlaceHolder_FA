@@ -12,15 +12,17 @@ from fastapi.responses import RedirectResponse
 #  IMPORTING SCHEMAS
 
 #  IMPORTING ROUTERS
-from routers import (profile_router, utilities_router)
+from routers import profile_router, utilities_router
 
 #  IMPORTING METADATA
 from api_metadata import api_metadata
 
-app = FastAPI(title="PlaceHolder - API",
-              description="A small api for testing proposites..",
-              version="0.0.1",
-              openapi_tags=api_metadata)
+app = FastAPI(
+    title="PlaceHolder - API",
+    description="A small api for testing proposites..",
+    version="0.0.1",
+    openapi_tags=api_metadata,
+)
 
 #  INCLUDING ROUTERS
 app.include_router(profile_router.profile_router)
@@ -30,6 +32,6 @@ app.include_router(utilities_router.utilities_router)
 BASE_DIR = Path(__file__).resolve().parent
 
 
-@app.get('/', include_in_schema=False)
+@app.get("/", include_in_schema=False)
 def api_home():
-    return ('HOME PAGE!')
+    return "HOME PAGE!"
